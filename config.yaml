@@ -1,0 +1,68 @@
+Database:
+  host: 192.168.32.64
+  port: 5433
+  user: pi
+  password: raspberry
+  database: I_want
+
+Log:
+  FileName: &LogFileName main.log
+  Level: DEBUG #["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+  Colorise: True # True | False
+
+version: 1
+disable_existing_loggers: False
+formatters:
+  default:
+    "()": uvicorn.logging.DefaultFormatter
+    datefmt: "%d-%b-%y %H:%M:%S"
+    format: '[%(asctime)s] %(levelprefix)-9s %(message)s'
+  access:
+    "()": uvicorn.logging.AccessFormatter
+    datefmt: "%d-%b-%y %H:%M:%S"
+    format: '[%(asctime)s] %(levelprefix)-9s %(client_addr)s - "%(request_line)s" %(status_code)s'
+  default_file_no_color:
+    "()": uvicorn.logging.DefaultFormatter
+    datefmt: "%d-%b-%y %H:%M:%S"
+    format: '{Uvicorn} [%(asctime)-18s] (%(levelname)-8s): %(message)s'
+    use_colors: False
+  access_file_no_color:
+    "()": uvicorn.logging.AccessFormatter
+    datefmt: "%d-%b-%y %H:%M:%S"
+    format: '{Uvicorn} [%(asctime)-18s] (%(levelname)-8s): %(client_addr)s - "%(request_line)s" %(status_code)s'
+    use_colors: False
+handlers:
+  default:
+    class: logging.StreamHandler
+    formatter: default
+    stream: ext://sys.stderr
+  access:
+    class: logging.StreamHandler
+    formatter: access
+    stream: ext://sys.stdout
+  file:
+    class : logging.handlers.RotatingFileHandler
+    formatter: default_file_no_color
+    filename: *LogFileName
+  file_access:
+    class : logging.handlers.RotatingFileHandler
+    formatter: access_file_no_color
+    filename: *LogFileName
+loggers:
+  uvicorn:
+    level: DEBUG
+    handlers:
+      - default
+      - file
+  uvicorn.error:
+    level: DEBUG
+    handlers:
+      - default
+      - file
+    propagate: no
+  uvicorn.access:
+    level: DEBUG
+    handlers:
+      - access
+      - file_access
+    propagate: no

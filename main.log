@@ -1,0 +1,11 @@
+{App}     [14-Jun-22 10:00:01] (INFO    ): Logger init - OK
+{App}     [14-Jun-22 10:00:01] (DEBUG   ): registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+{App}     [14-Jun-22 10:00:01] (DEBUG   ): registered 'des_crypt' handler: <class 'passlib.handlers.des_crypt.des_crypt'>
+{App}     [14-Jun-22 10:00:01] (INFO    ): Server startup - OK
+{App}     [14-Jun-22 10:00:01] (DEBUG   ): Initialization (DatabaseConnector) module...
+{App}     [14-Jun-22 10:00:01] (DEBUG   ): Try read database authorization data from config.yaml
+{App}     [14-Jun-22 10:00:01] (DEBUG   ): Read database authorization data - OK
+{App}     [14-Jun-22 10:00:01] (INFO    ): Try connection to database (192.168.32.64:5433/I_want)
+{App}     [14-Jun-22 10:00:01] (INFO    ): Connection to database - success. Server version - final.14.0.1, pid - 338200
+{App}     [14-Jun-22 10:00:01] (DEBUG   ): (DatabaseConnector) module ready to work
+{Uvicorn} [14-Jun-22 10:00:01] (INFO    ): Application startup complete.
